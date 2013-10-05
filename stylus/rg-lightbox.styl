@@ -1,0 +1,43 @@
+@import 'nib'
+/*!
+ * RG Lightbox 0.0.1
+ *
+ * Copyright 2013 RGkevin
+ *
+ * Built by @RGkevin
+ */
+
+// Backdrop
+
+.rglightbox-backdrop
+	background-color: #000
+	position fixed
+	left 0
+	top 0
+	right 0
+	bottom 0
+	z-index 1001
+
+.rg-fade
+	opacity(0)
+	transition opacity 350ms
+
+	&.rg-fadein
+		opacity(.85)
+
+.rglightbox-container
+	position: fixed
+	top 15px
+	left 15px
+	right 15px
+	bottom 15px
+	z-index 1002
+
+.rglightbox
+	background-color: #F1F1F1
+	padding 10px
+	border solid 1px #ccc
+	border-radius 2px
+
+	&.rg-fadein
+		opacity(1)

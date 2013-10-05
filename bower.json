@@ -1,0 +1,24 @@
+{
+  "name": "rg-lightbox",
+  "main": "rg-lightbox.js",
+  "version": "0.0.1",
+  "authors": [
+    "Kevin Lopez <rebeliongraficks@gmail.com>"
+  ],
+  "description": "Simple and faster lightbox with CSS3 animations",
+  "keywords": [
+    "lightbox",
+    "css3",
+    "faster"
+  ],
+  "license": "MIT",
+  "homepage": "http://rgkevin.it",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

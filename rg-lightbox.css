@@ -1,0 +1,13 @@
+/*
+ * RG Lightbox 0.0.1
+ *
+ * Copyright 2013 RGkevin
+ *
+ * Built by @RGkevin
+ */
+.rglightbox-backdrop{background-color:#000;position:fixed;left:0;top:0;right:0;bottom:0;z-index:1001}
+.rg-fade{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transition:opacity 350ms;-moz-transition:opacity 350ms;-o-transition:opacity 350ms;-ms-transition:opacity 350ms;transition:opacity 350ms;}
+.rg-fade.rg-fadein{opacity:.85;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";filter:alpha(opacity=85)}
+.rglightbox-container{position:fixed;top:15px;left:15px;right:15px;bottom:15px;z-index:1002}
+.rglightbox{background-color:#f1f1f1;padding:10px;border:solid 1px #ccc;-webkit-border-radius:2px;border-radius:2px;}
+.rglightbox.rg-fadein{opacity:1;-ms-filter:none;filter:none}
