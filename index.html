@@ -6,6 +6,7 @@
     <title>RG-lightbox by RGkevin</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/rg-lightbox.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
@@ -43,7 +44,23 @@
         </h3>
 
         <p>A simple and lightweight javascript module that allows you to overlay images on the top of your webs. [I'm working on mobile friendly feature]</p>
+        <p>No jQuery needed!</p>
 
+        <h2>DEMO</h2>
+        <h4>Individual Images</h4>
+        <a href="http://lorempixel.com/460/280/cats/" data-lightbox><img src="http://lorempixel.com/200/100/cats/" alt=""></a>
+        <a href="http://lorempixel.com/400/380/sports/" data-lightbox><img src="http://lorempixel.com/200/100/sports/" alt=""></a>
+        <a href="http://lorempixel.com/360/200/nature/" data-lightbox><img src="http://lorempixel.com/200/100/nature/" alt=""></a>
+
+        <h4>Galleries</h4>
+        <h5>Gallery #1</h5>
+        <a href="http://lorempixel.com/460/280/abstract/" data-lightbox="my-gallery-1"><img src="http://lorempixel.com/200/100/abstract/" alt=""></a>
+        <a href="http://lorempixel.com/400/380/animals/" data-lightbox="my-gallery-1"><img src="http://lorempixel.com/200/100/animals/" alt=""></a>
+        <a href="http://lorempixel.com/360/200/food/" data-lightbox="my-gallery-1"><img src="http://lorempixel.com/200/100/food/" alt=""></a>
+        <h5>Gallery #2</h5>
+        <a href="http://placehold.it/460x280" data-lightbox="my-gallery-2"><img src="http://placehold.it/200x100" alt=""></a>
+        <a href="http://placehold.it/400x300" data-lightbox="my-gallery-2"><img src="http://placehold.it/200x100" alt=""></a>
+        <a href="http://placehold.it/360x200" data-lightbox="my-gallery-2"><img src="http://placehold.it/200x100" alt=""></a>
         <h2><a href="#installing" name="installing" class="anchor"><span class="octicon octicon-link">Installation</span></a></h2>
 
         <h3>Using Bower</h3>
@@ -58,12 +75,66 @@
         <p>You have to include the two required files <code>/dist/rg-lightbox.min.js</code> and <code>/dist/spin.js</code>. Also you need to add the CSS file <code>dist/rg-lightbox.css</code>.</p>
         <p>Finally add to your main javascript file the following code</p>
         <pre><code>var myCustomLightbox = new RGlightbox({/*options*/});</code></pre>
+
+        <h3>RequireJS</h3>
+        <pre><code>define(['rg-lightbox'], function(RGlightbox) {
+  var myCustomLightbox = new RGlightbox({/*options*/});
+});</code></pre>
+
+        <h2><a href="#options" name="options" class="anchor"><span class="octicon octicon-link">Options</span></a></h2>
+
+        <h3>Transition [number]</h3>
+        <p>Time in milliseconds of the CSS property <code>-transition</code></p>
+        <pre><code>transition: 350 //default</code></pre>
+
+        <h3>prevText [String]</h3>
+        <p>Inner text for 'Prev button'</p>
+        <pre><code>prevText: 'left' //default</code></pre>
+
+        <h3>nextText [String]</h3>
+        <p>Inner text for 'Next button'</p>
+        <pre><code>nextText: 'next' //default</code></pre>
+
+        <h3>Spin [object]</h3>
+        <p>RGlightbox uses the <a href="http://fgnass.github.io/spin.js/" target="_blank">SpinJS</a> library, so you can customize it using its own properties. <small>*see spinJS documentation</small></p>
+        <pre><code>{
+  lines: 13, // The number of lines to draw
+  length: 20, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 1, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: 'auto', // Top position relative to parent in px
+  left: 'auto' // Left position relative to parent in px
+}</code></pre>
+
+        <h3>There you go! Feel free to tell me any idea you want to integrate with this little plugin.</h3>
+
         <hr>
         <p>Follow me on twitter for updates and mention me if you have any questions <a href="https://twitter.com/rgkevin" class="user-mention">@RGkevin</a>.</p>
 
       </section>
 
     </div>
+
+
+    <script src="javascripts/spin.js"></script>
+    <script src="javascripts/rg-lightbox.js"></script>
+    <script>
+    window.myLightbox = new RGlightbox({
+      prevText: 'Prev',
+      nextText: 'Next'
+    });
+    </script>
+
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
