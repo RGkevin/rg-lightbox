@@ -3,13 +3,17 @@
   "main": "rg-lightbox.js",
   "version": "0.0.1",
   "authors": [
-    "Kevin Lopez <rebeliongraficks@gmail.com>"
+    "Kevin Lopez <eduardo@rgkevin.it>"
   ],
-  "description": "Simple and faster lightbox with CSS3 animations",
+  "description": "Simple and faster lightbox width CSS3 animation, responsive and AMD available",
   "keywords": [
-    "lightbox",
+    "lightobox",
     "css3",
-    "faster"
+    "lightweight",
+    "spinjs",
+    "spin",
+    "responsive",
+    "amd"
   ],
   "license": "MIT",
   "homepage": "http://rgkevin.it",
@@ -19,6 +23,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {}
+  ]
 }
