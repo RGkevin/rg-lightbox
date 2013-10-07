@@ -32,43 +32,35 @@
       <section>
         <div id="title">
           <h1>RG-lightbox</h1>
-          <p>Simple and faster Lightbox, based in CSS3 animation and AMD available </p>
+          <p>Simple and faster Lightbox, based in CSS3 animation and AMD available and <a href="http://fgnass.github.io/spin.js/">spin.js</a> integration.</p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/RGkevin">RGkevin</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
         <h3>
-<a name="rg-lightbox" class="anchor" href="#rg-lightbox"><span class="octicon octicon-link"></span></a>RG Lightbox</h3>
+          <a name="rg-lightbox" class="anchor" href="#rg-lightbox"><span class="octicon octicon-link">RG Lightbox</span></a>
+        </h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+        <p>A simple and lightweight javascript module that allows you to overlay images on the top of your webs. [I'm working on mobile friendly feature]</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+        <h2><a href="#installing" name="installing" class="anchor"><span class="octicon octicon-link">Installation</span></a></h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+        <h3>Using Bower</h3>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+        <pre><code>$ bower install rg-lightbox --save</code></pre>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+        <h3>Downloading source</h3>
+        <p>You can download the source code and then add the required files to your HTML</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+        <h2><a href="#usage" name="usage" class="anchor"><span class="octicon octicon-link">Usage</span></a></h2>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+        <p>You have to include the two required files <code>/dist/rg-lightbox.min.js</code> and <code>/dist/spin.js</code>. Also you need to add the CSS file <code>dist/rg-lightbox.css</code>.</p>
+        <p>Finally add to your main javascript file the following code</p>
+        <pre><code>var myCustomLightbox = new RGlightbox({/*options*/});</code></pre>
+        <hr>
+        <p>Follow me on twitter for updates and mention me if you have any questions <a href="https://twitter.com/rgkevin" class="user-mention">@RGkevin</a>.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
       </section>
 
     </div>
