@@ -87,6 +87,8 @@
 
   var defaults = {
   	transition: 350,				// transition duration
+  	prevText : 'left',			// texto for left button
+  	nextText : 'right',     // texto for right button
   	spin : {
   		top: 50,
   		left: 50
@@ -94,24 +96,18 @@
   }
 
   /* Constructor */
-  function RGlightbox() {
-  	if (typeof this == 'undefined') return new RGlightbox(arguments)
+  function RGlightbox(options) {
+  	if (typeof this == 'undefined') return new RGlightbox(options);
+  	// auto select all a elements with the data-lightbox attr
+		this.elements = window.document.querySelectorAll(['a[data-lightbox]']);
   	// extends defaults
-    // check if the arguments passed are HTML elements or and data object
-  	if (arguments[0].length) {
-  		this.elements = arguments[0];
-	    this.opts = merge(arguments[1] || {}, RGlightbox.defaults, defaults);
-  	} else {
-  		this.elements = [];
-	    this.opts = merge(arguments[0] || {}, RGlightbox.defaults, defaults)
-  	}
-  	// console.log(this.opts, this.elements);
+    this.opts = merge(options || {}, RGlightbox.defaults, defaults);
   	// start RGlightbox
   	this.init();
   }
 
   // Global defaults that override the built-ins:
-  Spinner.defaults = {}
+  Spinner.defaults = {};
 
   /**
    * Build Prototype
@@ -121,11 +117,17 @@
 
   	// start everything
   	init: function (){
-  		console.log('start everything');
   		// create galleries
   		this.createGalleries(this.elements);
   		// bind events
   		this.bind(this.elements);
+  	},
+
+  	// destroy lightbox
+  	destroy: function() {
+  		console.log('se va a destruir');
+  		console.log(this.elements);
+  		this.bind(this.elements, true);
   	},
 
   	// show gallery
@@ -135,7 +137,6 @@
 			_gallery._startImage    = _gallery.urls.indexOf(url);
 			_gallery._galleryLength = _gallery.urls.length - 1;
 
-  		console.log('se mostrara', _gallery._startImage, 'de', _gallery._galleryLength);
   		// start lightbox
   		this.showLB();
   		// build controlls
@@ -144,6 +145,18 @@
   		this.showImageOfGallery(_gallery.urls, _gallery._startImage);
   		// set controlls events
   		this.bindControlls(gallery);
+  	},
+
+  	// show individual Image
+  	showImage: function(url) {
+  		// start lightbox
+  		this.showLB();
+  		// load image
+  		this.showImageOfGallery([url], 0);
+  		// build close button
+  		this.buildControlls('close');
+  		// set close event
+  		this.bindControlls('close');
   	},
 
   	// close lightbox
@@ -236,24 +249,25 @@
 	  },
 
 	  // build controls
-	  buildControlls: function(){
-			var _lightbox = this.buildLB(),
-			_left = _lightbox.getElementsByClassName('rglightbox-left')[0],
-			_right        = _lightbox.getElementsByClassName('rglightbox-right')[0],
-			_close        = _lightbox.getElementsByClassName('rglightbox-close')[0];
+	  buildControlls: function(method){
+			var _lightbox  = this.buildLB(),
+			_left          = _lightbox.getElementsByClassName('rglightbox-left')[0],
+			_right         = _lightbox.getElementsByClassName('rglightbox-right')[0],
+			_close         = _lightbox.getElementsByClassName('rglightbox-close')[0];
+			this.controlls = [];
 
-			if (!_left) {
+			if (!_left && method !== 'close') {
 				// creating left control
 				_left         = window.document.createElement('a');
-				_left.textContent  = 'left';
+				_left.textContent  = this.opts.prevText;
 				_left.className    = 'rglightbox-left';
 				_lightbox.appendChild(_left);
 			}
 
-			if (!_right) {
+			if (!_right && method !== 'close') {
 				_right = window.document.createElement('a');
 				// creating right control
-				_right.textContent = 'right';
+				_right.textContent = this.opts.nextText;
 				_right.className   = 'rglightbox-right';
 				_lightbox.appendChild(_right);
 			}
@@ -265,54 +279,52 @@
 				_close.title       = 'Close';
 				_lightbox.appendChild(_close);
 			}
-			return [_left, _right, _close];
+			this.controlls = [_left, _right, _close];
 	  },
 
 	  // bind events to controlls
 	  bindControlls: function(gallery) {
 			var _that = this,
-			_buttons  = this.buildControlls(),
+			_buttons  = this.controlls,
 			_prevBtn  = _buttons[0],
 			_nextBtn  = _buttons[1],
 			_closeBtn = _buttons[2];
-	  	// set prev event
-	  	_prevBtn.addEventListener('click', function(event) {
-	  		var _gallery = _that.getGalleryDataByName(gallery),
-	  		_newStartImage;
-	  		if (_gallery._startImage > 0) {
-		  		_newStartImage = --_that.getGalleryDataByName(gallery)._startImage;
-	  		} else {
-	  			_newStartImage = _that.getGalleryDataByName(gallery)._startImage = _gallery._galleryLength;
-	  		}
-	  		_that.showImageOfGallery(_gallery.urls, _newStartImage);
-	  		preventDefault(event);
-	  	});
 
-	  	// set next event
-	  	_nextBtn.addEventListener('click', function(event) {
-	  		var _gallery = _that.getGalleryDataByName(gallery),
-	  		_newStartImage;
-	  		if (_gallery._startImage < _gallery._galleryLength) {
-		  		_newStartImage = ++_that.getGalleryDataByName(gallery)._startImage;
-	  		} else {
-	  			_newStartImage = _that.getGalleryDataByName(gallery)._startImage = 0;
-	  		}
-	  		_that.showImageOfGallery(_gallery.urls, _newStartImage);
-	  		preventDefault(event);
-	  	});
+			if (gallery !== 'close') {
+
+		  	// set prev event
+		  	_prevBtn.addEventListener('click', function(event) {
+		  		var _gallery = _that.getGalleryDataByName(gallery),
+		  		_newStartImage;
+		  		if (_gallery._startImage > 0) {
+			  		_newStartImage = --_that.getGalleryDataByName(gallery)._startImage;
+		  		} else {
+		  			_newStartImage = _that.getGalleryDataByName(gallery)._startImage = _gallery._galleryLength;
+		  		}
+		  		_that.showImageOfGallery(_gallery.urls, _newStartImage);
+		  		preventDefault(event);
+		  	});
+
+		  	// set next event
+		  	_nextBtn.addEventListener('click', function(event) {
+		  		var _gallery = _that.getGalleryDataByName(gallery),
+		  		_newStartImage;
+		  		if (_gallery._startImage < _gallery._galleryLength) {
+			  		_newStartImage = ++_that.getGalleryDataByName(gallery)._startImage;
+		  		} else {
+		  			_newStartImage = _that.getGalleryDataByName(gallery)._startImage = 0;
+		  		}
+		  		_that.showImageOfGallery(_gallery.urls, _newStartImage);
+		  		preventDefault(event);
+		  	});
+			}
 
 	  	// set close event
 	  	_closeBtn.addEventListener('click', function(event) {
-	  		console.log('se cerrara el lightbox');
 	  		_that.close();
 	  		preventDefault(event);
 	  	});
 	  },
-
-	  // show Image
-  	showImage: function(url) {
-  		console.log('se motrara', url);
-  	},
 
 	  // show image of gallery
 		showImageOfGallery:function(urls, index) {
@@ -387,8 +399,7 @@
 					var spinner   = _lb.getElementsByClassName('spinner')[0] ? null : new Spinner(_that.opts.spin).spin(_lb);
 				},
 				stop: function() {
-					var _newClassName = _lb.className.replace(' rglightbox-loading', ' ');
-					console.log('se borrara spinner', _lb.getElementsByClassName('spinner')[0]);
+					var _newClassName = _lb.className.replace(' rglightbox-loading', ' '); // remove loading class
 					if( _lb.getElementsByClassName('spinner')[0] ) {
 						_lb.removeChild( _lb.getElementsByClassName('spinner')[0] || [] ); // remove spinner
 					}
@@ -427,7 +438,6 @@
 					urls: getUrls(galleries[i])
 				});
 			}
-			console.log(this.galleries);
 	  },
 
 	  // get gallery
@@ -442,27 +452,50 @@
 	  },
 
 	  // bind events
-	  bind:function(elements) {
-	  	var _that = this;
+	  bind:function(elements, destroy) {
+	  	var _that = this,
+	  	_click;
+
+	  	_click = function(event) {
+	  			if (_that.validateImage(this.href)) { // validate image url
+		  			if (this.getAttribute('data-lightbox') !== '') {
+		  				// show gallery
+		  				_that.showGallery(this.getAttribute('data-lightbox'), this.href);
+		  			} else {
+		  				// show individual image
+		  				_that.showImage(this.href);
+		  			}
+	  			} else {
+	  				this.removeEventListener('click', _click, false);
+	  			}
+	  			preventDefault(event);
+
+	  	};
+
+	  	// unbind click event
+	  	if (destroy) {
+		  	for (var i = 0, len = elements.length; i < len; i++) {
+		  		elements[i].removeEventListener('click', _click, false);
+		  	}
+		  	return;
+	  	}
 
 	  	// bind click event
 	  	for (var i = 0, len = elements.length; i < len; i++) {
-	  		elements[i].addEventListener('click', function(event) {
-	  			console.log('se clico', this);
-
-	  			if (this.getAttribute('data-lightbox') !== '') {
-	  				// show gallery
-	  				_that.showGallery(this.getAttribute('data-lightbox'), this.href || '');
-	  			} else {
-	  				_that.showImage(this.href);
-	  			}
-
-	  			preventDefault(event);
-	  		}, false);
+	  		elements[i].addEventListener('click', _click, false);
 	  	}
-	  }
-  });
+	  },
 
+	  // validate image
+  	validateImage: function(url) {
+  		if (typeof url === "string" && url.length > 0) {
+  			return url;
+  		} else {
+  			window.alert('There was an error validating the image. Press ok to close lightbox.');
+  			return false;
+  		}
+  	}
+  });
 
   return RGlightbox;
 });
