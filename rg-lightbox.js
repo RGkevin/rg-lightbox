@@ -89,6 +89,7 @@
   	transition: 350,				// transition duration
   	prevText : 'left',			// texto for left button
   	nextText : 'right',     // texto for right button
+  	keyboard: true,
   	spin : {
   		top: 50,
   		left: 50
@@ -175,8 +176,9 @@
   			window.setTimeout(function() {
 	  			_body.removeChild(_lbBackdrop);
   			}, _that.opts.transition);
-  			// _body.removeChild(_lbBackdrop);
   		}, this.opts.transition);
+  		// unbind keyboard
+  		this.escape(false);
   	},
 
 	  /**
@@ -282,7 +284,7 @@
 			this.controlls = [_left, _right, _close];
 	  },
 
-	  // bind events to controlls
+	  // bind events to controlls and keyboard if available
 	  bindControlls: function(gallery) {
 			var _that = this,
 			_buttons  = this.controlls,
@@ -324,7 +326,29 @@
 	  		_that.close();
 	  		preventDefault(event);
 	  	});
+
+	  	// bind keyboard
+	  	// if(this.opts.keyboard) {
+	  	// 	this.escape(true);
+	  	// }
 	  },
+
+	  // escape
+	  escape: function(bind) {
+	  	var _that = this,
+	  	_escape;
+	  	_escape = function(event) {
+	  		if (event.which == 27) {
+	  			_that.close();
+	  		}
+	  	}
+	  	if (bind) {
+		  	window.document.addEventListener('keydown', _escape, false);
+	  	} else {
+	  		console.log('se eliminara el evento');
+	  		window.document.removeEventListener('keydown', _escape, false);
+	  	}
+  	},
 
 	  // show image of gallery
 		showImageOfGallery:function(urls, index) {
