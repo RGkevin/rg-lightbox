@@ -81,6 +81,29 @@
   var myCustomLightbox = new RGlightbox({/*options*/});
 });</code></pre>
 
+        <h3>The HTML</h3>
+        <p>You just need to add the <code>data-lightbox</code> to bind the lightbox to your links.</p>
+        <p><strong>Creating galleries:</strong> just add the same value to the attribute.</p>
+        <pre><code>//creating individual images
+  &#60a data-lightbox href="http://lorempixel.com/460/280/cats/" >
+    &#60img src="http://lorempixel.com/200/100/cats/" alt="">
+  &#60/a>
+  //creating galleries
+  &#60a data-lightbox="my-gallery" href="http://lorempixel.com/460/280/cats/">
+    &#60img src="http://lorempixel.com/200/100/cats/" alt="">
+  &#60/a>
+  &#60a data-lightbox="my-gallery" href="http://lorempixel.com/460/280/cats/">
+    &#60img src="http://lorempixel.com/200/100/cats/" alt="">
+  &#60/a>
+  //another gallery
+  &#60a data-lightbox="my-second-gallery" href="http://lorempixel.com/460/280/cats/">
+    &#60img src="http://lorempixel.com/200/100/cats/" alt="">
+  &#60/a>
+  &#60a data-lightbox="my-second-gallery" href="http://lorempixel.com/460/280/cats/">
+    &#60img src="http://lorempixel.com/200/100/cats/" alt="">
+  &#60/a>
+  </code></pre>
+
         <h2><a href="#options" name="options" class="anchor"><span class="octicon octicon-link">Options</span></a></h2>
 
         <h3>Transition [number]</h3>
